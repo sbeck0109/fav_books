@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+
+
+  {% load static %}
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  <script src="{% static 'js/script.js' %}"></script>
+</head>
+
+<body class="text-center">
+  <!-- error messages -->
+  <div class="messages_all">
+    {% if messages %}
+    <ul id="error_list" class="messages_list">
+      {% for message in messages %}
+      <li {% if message.tags %} class="{{message.tags}}" {% endif %}>
+        {{message}}
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div><br>
+  <div class="reg">
+    <h3>Registration</h3>
+    <form action="/process_reg" method="POST" id="reg_form">
+      {% csrf_token %}
+      <label for="first_name">First Name</label><br />
+      <input type="text" name="first_name" /><br />
+      <label for="last_name">Last Name</label><br />
+      <input type="text" name="last_name" /><br />
+      <label for="email">Email</label><br />
+      <input type="text" name="email" /><br />
+      <label for="password">Password</label><br />
+      <input type="password" name="password" /><br />
+      <label for="confirm_password">Confirm Password</label><br />
+      <input type="password" name="confirm_password" /><br />
+      <button class="btn_reg">Register</button>
+    </form>
+  </div>
+  <!-- login -->
+  <div class="login">
+
+    <h3>Login</h3>
+    <form action="/process_login" method="POST" id="login_form">
+      {% csrf_token %}
+      <label for="email">Email</label><br />
+      <input type="text" name="email" /><br />
+      <label for="password">Password</label><br />
+      <input type="password" name="password" /><br />
+      <button class="btn_login">Log In</button>
+    </form>
+  </div>
+  </div>
+</body>
+
+</html>
